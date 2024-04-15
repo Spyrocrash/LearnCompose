@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.learncompose.Feature
 import com.example.learncompose.R
 import com.example.learncompose.ui.BottomMenuContent
@@ -28,8 +29,8 @@ import com.example.learncompose.ui.theme.*
 
 @Composable
 fun HomeScreen(
-    //navController:
-    //NavController
+    navController:
+    NavController
 ) {
     Box(
         modifier = Modifier
@@ -41,7 +42,7 @@ fun HomeScreen(
             GreetingSection(userName = "Alexinio")
             ChipSection(listOf("Good", "Normal", "Insomnia", "Depression"))
             CurrentMeditation(
-                //navController
+                navController
             )
 
                 FeatureSection(
@@ -90,6 +91,62 @@ fun HomeScreen(
 
     }
 
+
+@Composable
+fun CurrentMeditation(
+    navController: NavController
+) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(15.dp)
+            .clip(RoundedCornerShape(15.dp))
+            .background(LightRed)
+            .padding(15.dp)
+            .clickable {
+                navController.navigate(Screen.MeditationScreen.route)
+            }
+
+    ) {
+        Column {
+            Text(
+                text = "Daily Thoughts",
+                style = MaterialTheme.typography.h2,
+                modifier = Modifier
+                    .padding(bottom = 5.dp)
+            )
+            Text(
+                text = "Meditation 3-10 min",
+                style = MaterialTheme.typography.body2,
+                color = TextWhite
+            )
+        }
+
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .size(40.dp)
+                .clip(CircleShape)
+                .background(ButtonBlue)
+                .padding(10.dp)
+
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_play),
+                contentDescription = "Play",
+                tint = Color.White,
+                modifier = Modifier
+                    .size(15.dp)
+                //.padding(2.dp)
+
+
+            )
+        }
+
+    }
+}
 
     @Composable
     fun GreetingSection(
@@ -232,61 +289,7 @@ fun HomeScreen(
     }
 
 
-    @Composable
-    fun CurrentMeditation(
-        //navController: NavController
-    ) {
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(15.dp)
-                .clip(RoundedCornerShape(15.dp))
-                .background(LightRed)
-                .padding(15.dp)
-                .clickable {
-                    //navController.navigate(Screen.MeditationScreen.route)
-                }
 
-        ) {
-            Column {
-                Text(
-                    text = "Daily Thoughts",
-                    style = MaterialTheme.typography.h2,
-                    modifier = Modifier
-                        .padding(bottom = 5.dp)
-                )
-                Text(
-                    text = "Meditation 3-10 min",
-                    style = MaterialTheme.typography.body2,
-                    color = TextWhite
-                )
-            }
-
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(CircleShape)
-                    .background(ButtonBlue)
-                    .padding(10.dp)
-
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_play),
-                    contentDescription = "Play",
-                    tint = Color.White,
-                    modifier = Modifier
-                        .size(15.dp)
-                    //.padding(2.dp)
-
-
-                )
-            }
-
-        }
-    }
 
 @Composable
 fun BottomMenu(

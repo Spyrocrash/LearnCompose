@@ -3,7 +3,12 @@ package com.example.learncompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.learncompose.ui.compose.meditationui.HomeScreen
+import com.example.learncompose.ui.compose.meditationui.MeditationScreen
+import com.example.learncompose.ui.compose.meditationui.Screen
 import com.example.learncompose.ui.theme.MeditationUITheme
 
 
@@ -12,20 +17,17 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-//            val navController = rememberNavController()
-//            NavHost(navController =navController, startDestination = Screen.HomeScreen.route) {
-//                composable(Screen.HomeScreen.route) {
-//                    HomeScreen(navController = navController)
-//                }
-//                composable(route = Screen.MeditationScreen.route) {
-//                    MeditationScreen()
-//                }
-//            }
-
-
 
             MeditationUITheme {
-                HomeScreen()
+                val navController = rememberNavController()
+                NavHost(navController =navController, startDestination = Screen.HomeScreen.route) {
+                    composable(Screen.HomeScreen.route) {
+                        HomeScreen(navController = navController)
+                    }
+                    composable(route = Screen.MeditationScreen.route) {
+                        MeditationScreen()
+                    }
+                }
             }
 
 
